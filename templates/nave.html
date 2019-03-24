@@ -1,0 +1,77 @@
+
+{% extends "bootstrap/base.html" %}
+
+
+{% block content %}
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+ <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo mb-4">
+
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="/">Home</a>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <hr>
+          <br>
+        <form class="form-inline ml-auto", action="{{ url_for('search') }}" method="post">
+          <div class="md-form my-0">
+            <input name='entrada' class="form-control" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
+          </div>
+        </form>
+
+      </div>
+    </nav>
+
+    <div class="container">
+        <center> <h1>{{ variable.name }}</h1>  </center>
+        <h3> Model: </h3><p> {{ variable.model }} </p>
+        <h3> Manufacturer: </h3><p> {{ variable.manufacturer }} </p>
+        <h3> Cost in credits: </h3><p> {{ variable.cost_in_credits }} </p>
+        <h3> Length: </h3><p> {{ variable.length }} </p>
+        <h3> Max atmosphering speed: </h3><p> {{ variable.max_atmosphering_speed }} </p>
+        <h3> Crew: </h3><p> {{ variable.crew }} </p>
+        <h3> Passengers: </h3><p> {{ variable.passengers }} </p>
+        <h3> Cargo capacity: </h3><p> {{ variable.cargo_capacity }} </p>
+        <h3> Consumables: </h3><p> {{ variable.consumables }} </p>
+        <h3> Hyperdrive rating: </h3><p> {{ variable.hyperdrive_rating }} </p>
+        <h3> MGLT: </h3><p> {{ variable.MGLT }} </p>
+        <h3> Class: </h3><p> {{ variable.starship_class }} </p>
+
+        <h3> Films: </h3>
+        <table class="table">
+        {% for p in peliculas %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_pelicula', film_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+
+        <h3> Pilots: </h3>
+        <table class="table">
+        {% for p in pilotos %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_personaje', personaje_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

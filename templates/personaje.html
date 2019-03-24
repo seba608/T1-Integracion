@@ -1,0 +1,73 @@
+
+{% extends "bootstrap/base.html" %}
+
+
+{% block content %}
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+ <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark indigo mb-4">
+
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="/">Home</a>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <hr>
+          <br>
+        <form class="form-inline ml-auto", action="{{ url_for('search') }}" method="post">
+          <div class="md-form my-0">
+            <input name='entrada' class="form-control" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
+          </div>
+        </form>
+
+      </div>
+    </nav>
+
+    <div class="container">
+        <center> <h1>{{ personaje.name }}</h1>  </center>
+        <h3> Birdth Year: </h3><p> {{ personaje.birth_year }} </p>
+        <h3> Eye color: </h3><p> {{ personaje.eye_color }} </p>
+        <h3> Gender: </h3><p> {{ personaje.gender }} </p>
+        <h3> Hair color: </h3><p> {{ personaje.hair_color }} </p>
+        <h3> Height: </h3><p> {{ personaje.height }} </p>
+        <h3> Mass: </h3><p> {{ personaje.mass }} </p>
+        <h3> Name: </h3><p> {{ personaje.name }} </p>
+        <h3> Homeworld: </h3><p> {{ personaje.homeworld }} </p>
+
+        <h3> Films: </h3>
+        <table class="table">
+        {% for p in peliculas %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_pelicula', film_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+
+        <h3> Starships: </h3>
+        <table class="table">
+        {% for p in naves %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_nave', nave_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+
+{% extends "bootstrap/base.html" %}
+
+
+{% block content %}
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+     <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark indigo mb-4">
+
+          <!-- Navbar brand -->
+          <a class="navbar-brand" href="/">Home</a>
+
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <hr>
+              <br>
+            <form class="form-inline ml-auto", action="{{ url_for('search') }}" method="post">
+              <div class="md-form my-0">
+                <input name='entrada' class="form-control" type="text" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
+              </div>
+            </form>
+
+          </div>
+        </nav>
+
+    <div class="container">
+        <center> <h1>{{ variable.name }}</h1>  </center>
+        <h3> Rotation period: </h3><p> {{ variable.rotation_period }} </p>
+        <h3> Orbital period: </h3><p> {{ variable.orbital_period }} </p>
+        <h3> Diameter: </h3><p> {{ variable.diameter }} </p>
+        <h3> Climate: </h3><p> {{ variable.climate }} </p>
+        <h3> Gravity: </h3><p> {{ variable.gravity }} </p>
+        <h3> Terrain: </h3><p> {{ variable.terrain }} </p>
+        <h3> Surface Water: </h3><p> {{ variable.surface_water }} </p>
+        <h3> Population: </h3><p> {{ variable.population }} </p>
+
+        <h3> Films: </h3>
+        <table class="table">
+        {% for p in peliculas %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_pelicula', film_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+
+        <h3> Residents: </h3>
+        <table class="table">
+        {% for p in pilotos %}
+            <tr>
+                <th><a href= "{{ url_for('mostrar_personaje', personaje_id=p[1]) }}"> {{ p[0] }}</a></th>
+              </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
