@@ -50,12 +50,12 @@
         <h3> Height: </h3><p> {{ personaje.height }} </p>
         <h3> Mass: </h3><p> {{ personaje.mass }} </p>
         <h3> Name: </h3><p> {{ personaje.name }} </p>
-        <h3> Homeworld: </h3><p> {{ personaje.homeworld }} </p>
+        <h3> Homeworld: </h3><a href= "{{ url_for('mostrar_planeta', planeta_id=planeta[0][1]) }}"> {{ planeta[0][0] }}</a>
 
         <h3> Films: </h3>
         <table class="table">
         {% for p in peliculas %}
-            <tr>
+              <tr>
                 <th><a href= "{{ url_for('mostrar_pelicula', film_id=p[1]) }}"> {{ p[0] }}</a></th>
               </tr>
         {% endfor %}

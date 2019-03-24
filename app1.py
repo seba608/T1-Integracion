@@ -11,7 +11,7 @@ Bootstrap(app)
 def create_request(urls, buscar):
     data = []
 
-    otto = Octopus(concurrency=20, auto_start=True, cache=True, expiration_in_seconds=50)
+    otto = Octopus(concurrency=10, auto_start=True, cache=True, expiration_in_seconds=30)
 
     def handle_url_response(url, response):
         if "Not found" == response.text:
@@ -53,10 +53,12 @@ def mostrar_pelicula(film_id):
 def mostrar_personaje(personaje_id):
     r = requests.get("https://swapi.co/api/people/{}/".format(personaje_id))
     character = json.loads(r.text)
+    planeta = create_request([character['homeworld']], 'name')
     peliculas = create_request(character['films'], 'title')
     naves = create_request(character['starships'], 'name')
+    print(planeta)
     return render_template("personaje.html", personaje=character, peliculas=peliculas,
-                           naves=naves)
+                           naves=naves, planeta=planeta)
 
 
 @app.route('/nave/<int:nave_id>')
