@@ -3,4 +3,3 @@ Flask_Bootstrap==3.3.7.1
 Flask==1.0.2
 gunicorn==19.9.0
 octopus_http==0.6.4
-octopus==0.3.4
